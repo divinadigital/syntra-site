@@ -70,16 +70,16 @@ require __DIR__ . '/includes/header.php';
   <div class="wrap hero__grid">
     <div>
       <span class="eyebrow" data-reveal><span class="presence"><span class="dot <?= $online ? '' : 'dot--off' ?>"></span></span>
-        <span class="shiny">Gestão para clínicas e hospitais</span></span>
-      <h1 class="h1 split-text" data-split>A sinapse da sua <em>clínica.</em></h1>
-      <p class="lead" data-reveal style="--i:3">Agenda, recepção, laudo com ditado, faturamento de convênio e BI conversando entre si. Um cadastro, um login, uma fonte de verdade — do agendamento ao laudo liberado.</p>
+        <span class="shiny" data-cfg="hero.eyebrow">Gestão para clínicas e hospitais</span></span>
+      <h1 class="h1 split-text" data-split data-cfg-title>A sinapse da sua <em>clínica.</em></h1>
+      <p class="lead" data-reveal style="--i:3" data-cfg="hero.lead">Agenda, recepção, laudo com ditado, faturamento de convênio e BI conversando entre si. Um cadastro, um login, uma fonte de verdade — do agendamento ao laudo liberado.</p>
       <div class="cta-row" data-reveal style="--i:4">
         <a class="btn btn--primary magnetic" href="<?= cta('hero') ?>" data-cta="hero"><?= icon('whatsapp') ?> Falar com um especialista <?= icon('arrow', 18, 'i-arrow') ?></a>
         <a class="btn btn--on-dark" href="#modulos">Ver os módulos</a>
       </div>
       <p class="cta-note" data-reveal style="--i:5"><?= icon('clock', 16) ?>
         <?= $online ? 'Atendente online agora — resposta em minutos, sem compromisso.' : 'Fora do horário? Deixe sua mensagem — respondemos no próximo horário comercial.' ?></p>
-      <div class="hero__chips" data-reveal style="--i:6">
+      <div class="hero__chips" data-reveal style="--i:6" data-cfg-chips>
         <span class="chip"><?= icon('check', 14) ?> Implantação guiada</span>
         <span class="chip"><?= icon('check', 14) ?> TISS / TUSS</span>
         <span class="chip"><?= icon('check', 14) ?> PACS / DICOM</span>
@@ -422,7 +422,7 @@ require __DIR__ . '/includes/header.php';
         <h2 class="h2" style="margin-top:14px">Veja a Syntra funcionando com a rotina da sua clínica.</h2>
         <p class="lead">Conte em 20 segundos como é a sua operação. O atendente recebe tudo no WhatsApp e já começa a conversa no ponto certo.</p>
         <p class="cta-note" style="color:rgb(226 238 252 / .8)"><span class="dot <?= $online ? '' : 'dot--off' ?>"></span>
-          <?= $online ? 'Atendentes online agora' : 'Atendimento humano seg. a sex., ' . BUSINESS_START . '–' . BUSINESS_END ?></p>
+          <span data-hours-short><?= $online ? 'Atendentes online agora' : 'Atendimento humano seg. a sex., ' . BUSINESS_START . '–' . BUSINESS_END ?></span></p>
       </div>
 
       <form class="form" method="post" action="atendimento.php?origem=form" data-form novalidate>

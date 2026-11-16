@@ -20,7 +20,7 @@
         <ul>
           <li><a href="<?= cta('demo') ?>">Agendar demonstração</a></li>
           <li><a href="<?= cta('implantacao') ?>">Implantação e migração</a></li>
-          <li><a href="mailto:<?= CONTACT_EMAIL ?>"><?= CONTACT_EMAIL ?></a></li>
+          <li><a href="mailto:<?= CONTACT_EMAIL ?>" data-cfg-email><?= CONTACT_EMAIL ?></a></li>
         </ul>
       </div>
       <div>
@@ -33,7 +33,7 @@
     </div>
     <div class="footer__bottom">
       <span>© <?= date('Y') ?> Syntra · <?= SITE_TAGLINE ?></span>
-      <span>Atendimento humano: seg. a sex., <?= BUSINESS_START ?>–<?= BUSINESS_END ?></span>
+      <span data-hours-label>Atendimento humano: seg. a sex., <?= BUSINESS_START ?>–<?= BUSINESS_END ?></span>
     </div>
   </div>
 </footer>
