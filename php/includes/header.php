@@ -2,9 +2,21 @@
 /** @var string $pageTitle */
 /** @var string $pageDesc */
 $online = is_business_hours();
+/** Ícone oficial da Syntra (sinapse: nó central + 4 nós assimétricos). */
 function logo_mark(string $class = 'logo-mark'): string
 {
-    return '<svg class="' . $class . '" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1a7ad6"/><stop offset="1" stop-color="#0e4c8a"/></linearGradient></defs><rect width="32" height="32" rx="8" fill="url(#lg)"/><g stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M9 9l14 14M23 9 9 23"/></g><g fill="#fff"><circle cx="9" cy="9" r="2.6"/><circle cx="23" cy="9" r="2.6"/><circle cx="9" cy="23" r="2.6"/><circle cx="23" cy="23" r="2.6"/><circle cx="16" cy="16" r="3.2"/></g></svg>';
+    static $n = 0;
+    $id = 'syg' . (++$n);
+    return '<svg class="' . $class . '" viewBox="0 0 1024 1024" aria-hidden="true"><defs><linearGradient id="' . $id . '" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f568e"/><stop offset="1" stop-color="#0e9de2"/></linearGradient></defs>'
+        . '<rect width="1024" height="1024" rx="232" fill="url(#' . $id . ')"/>'
+        . '<g stroke="#eaf3fa" stroke-width="54" stroke-linecap="round"><path d="M288 318 512 512M736 288 512 512M384 768 512 512M768 704 512 512"/></g>'
+        . '<g fill="#fff"><circle cx="512" cy="512" r="98"/><circle cx="288" cy="318" r="67"/><circle cx="736" cy="288" r="67"/><circle cx="384" cy="768" r="67"/><circle cx="768" cy="704" r="67"/></g></svg>';
+}
+
+/** Logo completo: ícone + palavra "Syntra" em Lato com o degradê da marca. */
+function logo_full(): string
+{
+    return logo_mark() . '<span class="logo__word">Syntra</span>';
 }
 ?>
 <!doctype html>
@@ -22,8 +34,8 @@ function logo_mark(string $class = 'logo-mark'): string
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=1">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lato:wght@700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css?v=2">
   <script>
     // tema antes da pintura (sem "piscar")
     (function () {
@@ -40,7 +52,7 @@ function logo_mark(string $class = 'logo-mark'): string
 
 <header class="nav" id="nav">
   <div class="wrap nav__in">
-    <a href="#topo" class="logo" aria-label="Syntra — início"><?= logo_mark() ?><span>Syntra</span></a>
+    <a href="#topo" class="logo" aria-label="Syntra — início"><?= logo_full() ?></a>
 
     <nav aria-label="Principal">
       <ul class="nav__links" id="navLinks">
@@ -69,7 +81,7 @@ function logo_mark(string $class = 'logo-mark'): string
   <div class="drawer__bg" data-close></div>
   <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="drawer__top">
-      <span class="logo"><?= logo_mark() ?>Syntra</span>
+      <span class="logo"><?= logo_full() ?></span>
       <button class="icon-btn" type="button" data-close aria-label="Fechar menu"><?= icon('x') ?></button>
     </div>
     <ul>

@@ -121,7 +121,7 @@
     $$('.magnetic').forEach(b => {
       b.addEventListener('pointermove', e => {
         const r = b.getBoundingClientRect();
-        b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .18}px, ${(e.clientY - r.top - r.height / 2) * .3}px)`;
+        b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .06}px, ${(e.clientY - r.top - r.height / 2) * .1}px)`;
       });
       b.addEventListener('pointerleave', () => { b.style.transform = ''; });
     });
@@ -323,7 +323,8 @@
       const r = cv.getBoundingClientRect(); W = r.width; H = r.height;
       cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
       const n = Math.round(Math.min(90, (W * H) / 16000) * density);
-      nodes = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25, r: Math.random() * 1.6 + .8 }));
+      // deriva bem lenta: o fundo deve ser ambiente, não chamar atenção
+      nodes = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .07, vy: (Math.random() - .5) * .07, r: Math.random() * 1.4 + .7 }));
     };
     const LINK = 140;
     const draw = () => {
@@ -333,21 +334,21 @@
         if (a.x < 0 || a.x > W) a.vx *= -1;
         if (a.y < 0 || a.y > H) a.vy *= -1;
         const dx = a.x - mouse.x, dy = a.y - mouse.y, d = Math.hypot(dx, dy);
-        if (d < 120) { a.x += dx / d * .6; a.y += dy / d * .6; }
+        if (d < 120) { a.x += dx / d * .12; a.y += dy / d * .12; }
       }
       for (let i = 0; i < nodes.length; i++) for (let j = i + 1; j < nodes.length; j++) {
         const a = nodes[i], b = nodes[j], d = Math.hypot(a.x - b.x, a.y - b.y);
         if (d < LINK) {
-          ctx.strokeStyle = `rgba(159,208,255,${(1 - d / LINK) * .28})`; ctx.lineWidth = 1;
+          ctx.strokeStyle = `rgba(159,208,255,${(1 - d / LINK) * .2})`; ctx.lineWidth = 1;
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-          if (Math.random() < .0009 && pulses.length < 14) pulses.push({ a, b, t: 0 });
+          if (Math.random() < .00012 && pulses.length < 3) pulses.push({ a, b, t: 0 });
         }
       }
-      for (const n of nodes) { ctx.fillStyle = 'rgba(200,228,255,.75)'; ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.283); ctx.fill(); }
+      for (const n of nodes) { ctx.fillStyle = 'rgba(200,228,255,.55)'; ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, 6.283); ctx.fill(); }
       pulses = pulses.filter(p => p.t <= 1);
       for (const p of pulses) {
-        p.t += .018; const x = p.a.x + (p.b.x - p.a.x) * p.t, y = p.a.y + (p.b.y - p.a.y) * p.t;
-        const g = ctx.createRadialGradient(x, y, 0, x, y, 10); g.addColorStop(0, 'rgba(255,255,255,.95)'); g.addColorStop(1, 'rgba(120,190,255,0)');
+        p.t += .006; const x = p.a.x + (p.b.x - p.a.x) * p.t, y = p.a.y + (p.b.y - p.a.y) * p.t;
+        const g = ctx.createRadialGradient(x, y, 0, x, y, 10); g.addColorStop(0, 'rgba(255,255,255,.6)'); g.addColorStop(1, 'rgba(120,190,255,0)');
         ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, 10, 0, 6.283); ctx.fill();
       }
       if (visible) raf = requestAnimationFrame(draw);

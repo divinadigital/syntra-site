@@ -22,6 +22,7 @@
   --navy-1: #0b2f57;
   --navy-2: #1268bf;
 
+  --logo-1: #0f568e; --logo-2: #0e9de2;
   --ok: #15803d;   --ok-soft: #dcfce7;
   --warn: #b45309; --warn-soft: #fef3c7;
   --bad: #dc2626;  --bad-soft: #fee2e2;
@@ -59,6 +60,7 @@
   --line-2: #27405f;
   --accent: #4b9bf0;
   --accent-soft: #10294a;
+  --logo-1: #5aa9ec; --logo-2: #38c3f7;
   --brand: #0e3f73;
   --ok-soft: #0f2e1d; --warn-soft: #33240b; --bad-soft: #3a1515; --info-soft: #102849;
   --ok: #34d399; --warn: #fbbf24; --bad: #f87171; --info: #60a5fa;
@@ -118,9 +120,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
   transition: transform var(--d-quick) var(--ease-out), box-shadow var(--d-base) var(--ease-out), background-color var(--d-base), border-color var(--d-base), color var(--d-base);
   will-change: transform;
 }
-.btn:active { transform: scale(.97); }
-.btn svg { flex: none; transition: transform var(--d-base) var(--ease-spring); }
-.btn:hover .i-arrow { transform: translateX(4px); }
+.btn:active { transform: scale(.98); }
+/* botões magnéticos: seguem o mouse devagar e voltam suavemente */
+.btn.magnetic { transition: transform 650ms var(--ease-out), box-shadow 500ms var(--ease-out), background-color var(--d-base), border-color var(--d-base), color var(--d-base); }
+.btn svg { flex: none; transition: transform 450ms var(--ease-out); }
+.btn:hover .i-arrow { transform: translateX(3px); }
 .btn--primary {
   color: #fff;
   background: linear-gradient(180deg, #1a7ad6, #0e5aa6);
@@ -130,7 +134,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .btn--primary::after { /* brilho que passa no hover */
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / .35) 50%, transparent 70%);
-  transform: translateX(-120%); transition: transform 700ms var(--ease-out);
+  transform: translateX(-120%); transition: transform 1100ms var(--ease-out);
 }
 .btn--primary:hover::after { transform: translateX(120%); }
 .btn--primary:hover { box-shadow: 0 1px 0 rgb(255 255 255 / .25) inset, 0 14px 30px -10px rgb(14 90 166 / .8); }
@@ -152,8 +156,15 @@ button { font: inherit; color: inherit; cursor: pointer; }
 @keyframes ping { 0% { transform: scale(.6); opacity: .8; } 100% { transform: scale(1.8); opacity: 0; } }
 
 /* ---------- Logo ---------- */
-.logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 800; font-size: 19px; letter-spacing: -0.03em; }
-.logo-mark { width: 32px; height: 32px; flex: none; }
+.logo { display: inline-flex; align-items: center; gap: 10px; }
+.logo-mark { width: 34px; height: 34px; flex: none; }
+.logo__word {
+  font-family: "Lato", var(--font); font-weight: 900; font-size: 23px; letter-spacing: -0.01em; line-height: 1;
+  background: linear-gradient(90deg, var(--logo-1), var(--logo-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  padding-bottom: 2px;
+}
+/* sobre o azul do topo a palavra fica branca, como na versão negativa da marca */
+.nav:not(.is-scrolled) .logo__word { background: none; -webkit-text-fill-color: #fff; color: #fff; }
 
 /* ---------- Navegação ---------- */
 .nav {
@@ -273,9 +284,11 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .float-note b { display: block; font-size: 12.5px; }
 .float-note span { color: #6b7c93; font-size: 11.5px; }
 .float-note__ic { width: 32px; height: 32px; border-radius: 10px; display: grid; place-items: center; flex: none; }
-.float-note--a { left: -28px; bottom: 54px; animation: bob 6s ease-in-out infinite; }
-.float-note--b { right: -18px; top: -26px; animation: bob 7s ease-in-out -2s infinite; }
-@keyframes bob { 50% { translate: 0 -8px; } }
+/* balões ficam fora da tela do produto, só encostando na borda */
+.float-note--a { left: -44px; bottom: -58px; animation: bob 8s ease-in-out infinite; }
+.float-note--b { right: -52px; top: -74px; animation: bob 9s ease-in-out -3s infinite; }
+@keyframes bob { 50% { translate: 0 -5px; } }
+.hero .tilt { padding-block: 64px 48px; }
 
 /* ---------- Faixa de especialidades ---------- */
 .marquee { overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
@@ -401,7 +414,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 /* ---------- Segurança ---------- */
 .sec-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 40px; }
 .sec { padding: 22px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); }
-.sec svg { color: var(--ok); margin-bottom: 14px; }
+.sec svg { color: var(--accent); margin-bottom: 14px; }
 .sec h3 { margin: 0 0 6px; font-size: 16px; }
 .sec p { margin: 0; font-size: 14px; color: var(--muted); }
 

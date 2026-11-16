@@ -2,7 +2,7 @@
   <div class="wrap">
     <div class="footer__grid">
       <div>
-        <span class="logo"><?= logo_mark() ?>Syntra</span>
+        <span class="logo"><?= logo_full() ?></span>
         <p style="color:var(--muted);font-size:14.5px;max-width:34ch;margin:14px 0 18px">Gestão para clínicas e hospitais — agenda, atendimento, laudos, faturamento e BI no mesmo lugar.</p>
         <a class="btn btn--wa btn--sm" href="<?= cta('default') ?>" data-cta="footer"><?= icon('whatsapp', 18) ?> Chamar no WhatsApp</a>
       </div>
@@ -46,6 +46,6 @@
   <a class="fab__btn" href="<?= cta('flutuante') ?>" data-cta="flutuante" aria-label="Falar com um atendente no WhatsApp"><?= icon('whatsapp', 28) ?></a>
 </div>
 
-<script src="assets/js/main.js?v=1" defer></script>
+<script src="assets/js/main.js?v=2" defer></script>
 </body>
 </html>
