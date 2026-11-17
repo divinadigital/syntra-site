@@ -10,7 +10,7 @@
   var MSG_LABELS = {
     hero: 'Botão principal do topo', nav: 'Botão do menu (topo da página)', modulos: 'Seção Módulos',
     implantacao: 'Seção Implantação', demo: 'Demonstração, Laudos e "Para quem"', faq: 'Dúvidas (FAQ)',
-    flutuante: 'Botão flutuante do WhatsApp', 'default': 'Rodapé e demais botões'
+    flutuante: 'Botão flutuante do WhatsApp', instagram: 'Link da bio do Instagram', 'default': 'Rodapé e demais botões'
   };
   var FEATURES = {
     balloons: ['Balões na prévia do sistema', '"Laudo liberado" e "Alergia não perguntada" sobre a tela do topo.'],

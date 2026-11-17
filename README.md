@@ -18,3 +18,6 @@ A fonte é a versão PHP (`php/`). O `index.html` da raiz é gerado a partir del
 - **CSP**: as páginas só executam scripts do próprio site (não há script inline). Para adicionar Google Analytics ou Tag Manager, inclua os domínios deles em `script-src` e `connect-src` na meta `Content-Security-Policy` de `php/includes/header.php` e gere o site de novo.
 - **Admin**: `admin.html` não é indexado, não roda dentro de outras páginas e só se conecta ao próprio site e a `api.github.com`.
 - **SEO**: `sitemap.xml`, `robots.txt`, canonical, Open Graph (`assets/img/og.png`) e dados estruturados (Organization, WebSite, SoftwareApplication, FAQPage). O endereço público fica em `SITE_URL` (`php/config.php`); ao usar domínio próprio, troque lá e gere de novo.
+
+## Link da bio (Instagram)
+`bio.html` (abre em `/syntra-site/bio`) é a página de links para a bio do Instagram. Os botões de WhatsApp usam o número e as mensagens do `config.js`; a mensagem do botão principal é o campo "Link da bio do Instagram" no admin. O visual fica em `assets/css/bio.css`.

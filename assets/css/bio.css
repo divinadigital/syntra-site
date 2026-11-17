@@ -1,0 +1,88 @@
+/* Página de links (bio do Instagram): coluna única, pensada para o celular.
+   Visual único, no azul da marca — a página abre dentro do navegador do Instagram. */
+:root {
+  --navy-1: #0b2f57; --navy-2: #0f4f93; --navy-3: #1268bf;
+  --ink: #0b1b2e; --muted: #55667d; --sky: #9fd0ff; --soft: rgb(226 238 252 / .82);
+  --card: #ffffff; --accent: #1570c9; --accent-soft: #e3effb;
+  --ok: #22c55e; --warn: #f59e0b;
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; min-height: 100vh; min-height: 100dvh;
+  font: 16px/1.5 var(--font); color: #fff; -webkit-font-smoothing: antialiased;
+  background:
+    radial-gradient(700px 480px at 100% 100%, rgb(46 140 235 / .55), transparent 60%),
+    radial-gradient(520px 380px at 0% 0%, rgb(20 90 170 / .6), transparent 60%),
+    linear-gradient(160deg, var(--navy-1), var(--navy-2) 55%, var(--navy-3));
+  background-attachment: fixed;
+}
+.net { position: fixed; inset: 0; width: 100%; height: 100%; opacity: .22; pointer-events: none; }
+
+.bio {
+  position: relative; max-width: 480px; margin: 0 auto;
+  padding: max(40px, env(safe-area-inset-top, 0px) + 28px) max(20px, env(safe-area-inset-right, 0px)) max(28px, env(safe-area-inset-bottom, 0px) + 20px) max(20px, env(safe-area-inset-left, 0px));
+  display: flex; flex-direction: column; gap: 28px; min-height: 100vh; min-height: 100dvh;
+}
+
+.bio__head { text-align: center; }
+.bio__logo { width: 84px; height: 84px; display: block; margin: 0 auto 14px; border-radius: 22px; box-shadow: 0 18px 40px -14px rgb(4 20 44 / .8), 0 0 0 1px rgb(255 255 255 / .18); }
+h1 { margin: 0; font-family: "Lato", var(--font); font-weight: 900; font-size: 34px; letter-spacing: -.01em; line-height: 1.1; }
+.bio__tag { margin: 4px 0 0; color: var(--sky); font-weight: 600; font-size: 15.5px; }
+.bio__sub { margin: 12px auto 0; max-width: 34ch; color: var(--soft); font-size: 14.5px; text-wrap: balance; }
+.bio__status { display: inline-flex; align-items: center; gap: 8px; margin: 16px 0 0; padding: 6px 14px; border-radius: 99px; font-size: 13px; font-weight: 500; color: #e3f0ff; background: rgb(255 255 255 / .08); border: 1px solid rgb(255 255 255 / .16); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); flex: none; box-shadow: 0 0 0 4px rgb(34 197 94 / .2); }
+.dot--off { background: var(--warn); box-shadow: none; }
+
+.links { display: grid; gap: 12px; }
+.link {
+  display: grid; grid-template-columns: 46px 1fr auto; align-items: center; gap: 14px;
+  min-height: 72px; padding: 12px 16px 12px 12px; border-radius: 18px; text-decoration: none;
+  background: var(--card); color: var(--ink);
+  box-shadow: 0 14px 30px -18px rgb(4 20 44 / .9);
+  transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+.link:hover { transform: translateY(-2px); box-shadow: 0 20px 36px -18px rgb(4 20 44 / .95); }
+.link:active { transform: scale(.98); }
+.link:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.link__ic { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.link__tx { min-width: 0; }
+.link__tx b { display: block; font-size: 16px; font-weight: 700; letter-spacing: -.01em; line-height: 1.25; }
+.link__tx small { display: block; margin-top: 2px; font-size: 13px; color: var(--muted); line-height: 1.35; }
+.link__go { color: #9fb2c8; transition: transform .3s var(--ease-out); }
+.link:hover .link__go { transform: translateX(3px); }
+
+/* botão principal: WhatsApp */
+.link--wa { background: linear-gradient(180deg, #25c867, #17924a); color: #fff; }
+.link--wa .link__ic { background: rgb(255 255 255 / .18); color: #fff; }
+.link--wa .link__tx small { color: rgb(255 255 255 / .86); }
+.link--wa .link__go { color: rgb(255 255 255 / .85); }
+
+/* link secundário: quem já é cliente */
+.link--ghost { background: rgb(255 255 255 / .08); color: #fff; border: 1px solid rgb(255 255 255 / .2); box-shadow: none; }
+.link--ghost .link__ic { background: rgb(255 255 255 / .12); color: #fff; }
+.link--ghost .link__tx small { color: var(--soft); }
+.link--ghost .link__go { color: rgb(255 255 255 / .7); }
+
+.bio__foot { margin-top: auto; padding-top: 8px; display: grid; gap: 6px; justify-items: center; text-align: center; font-size: 13px; color: rgb(226 238 252 / .7); }
+.bio__foot a { color: #e3f0ff; text-decoration: underline; text-underline-offset: 3px; padding: 6px 4px; }
+
+/* entrada em sequência */
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+.bio__head > *, .link, .bio__foot { animation: rise .7s var(--ease-out) both; }
+.bio__head > :nth-child(2) { animation-delay: .05s; }
+.bio__head > :nth-child(3) { animation-delay: .1s; }
+.bio__head > :nth-child(4) { animation-delay: .15s; }
+.bio__head > :nth-child(5) { animation-delay: .2s; }
+.link:nth-child(1) { animation-delay: .26s; }
+.link:nth-child(2) { animation-delay: .33s; }
+.link:nth-child(3) { animation-delay: .4s; }
+.link:nth-child(4) { animation-delay: .47s; }
+.link:nth-child(5) { animation-delay: .54s; }
+.bio__foot { animation-delay: .62s; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+@media (max-width: 360px) { .link { grid-template-columns: 42px 1fr auto; gap: 12px; } .link__ic { width: 42px; height: 42px; } .link__tx b { font-size: 15px; } }

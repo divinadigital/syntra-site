@@ -20,6 +20,7 @@ window.SYNTRA_CONFIG = {
     "demo": "Olá! Gostaria de agendar uma demonstração da Syntra.",
     "faq": "Olá! Não achei minha dúvida no FAQ, pode me ajudar?",
     "flutuante": "Olá! Estou no site da Syntra e tenho uma dúvida.",
+    "instagram": "Olá! Vim pelo Instagram da Syntra e quero falar com um especialista.",
     "default": "Olá! Vim pelo site da Syntra."
   },
   "hero": {
