@@ -24,28 +24,86 @@ function logo_full(): string
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <!-- Segurança: só carrega scripts do próprio site (nenhum script inline) e fontes do Google Fonts.
+       Ao adicionar Analytics/Tag Manager, inclua os domínios deles em script-src e connect-src. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me https://api.whatsapp.com">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title><?= e($pageTitle) ?></title>
   <meta name="description" content="<?= e($pageDesc) ?>">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="<?= SITE_URL ?>/">
   <meta name="theme-color" content="#0b2f57">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Syntra">
+  <meta property="og:url" content="<?= SITE_URL ?>/">
   <meta property="og:title" content="<?= e($pageTitle) ?>">
   <meta property="og:description" content="<?= e($pageDesc) ?>">
   <meta property="og:locale" content="pt_BR">
+  <meta property="og:image" content="<?= SITE_URL ?>/assets/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Syntra — A sinapse da sua clínica. Sistema de gestão para clínicas e hospitais.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<?= e($pageTitle) ?>">
+  <meta name="twitter:description" content="<?= e($pageDesc) ?>">
+  <meta name="twitter:image" content="<?= SITE_URL ?>/assets/img/og.png">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lato:wght@700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=4">
-  <script>
-    // tema antes da pintura (sem "piscar")
-    (function () {
-      var d = document.documentElement; d.classList.add('js');
-      try { var t = localStorage.getItem('syntra-theme'); if (t) d.dataset.theme = t; } catch (e) {}
-    })();
-  </script>
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Syntra","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"<?= e($pageDesc) ?>","url":"<?= SITE_URL ?>"}
-  </script>
+  <link rel="stylesheet" href="assets/css/style.css?v=5">
+  <script src="assets/js/boot.js?v=1"></script>
+  <script type="application/ld+json"><?= json_encode([
+      '@context' => 'https://schema.org',
+      '@graph' => [
+          [
+              '@type' => 'Organization',
+              '@id' => SITE_URL . '/#org',
+              'name' => 'Syntra',
+              'url' => SITE_URL . '/',
+              'logo' => SITE_URL . '/assets/img/icon-512.png',
+              'slogan' => SITE_TAGLINE,
+              'email' => CONTACT_EMAIL,
+              'contactPoint' => [
+                  '@type' => 'ContactPoint',
+                  'contactType' => 'sales',
+                  'telephone' => '+' . WHATSAPP_NUMBER,
+                  'availableLanguage' => 'pt-BR',
+                  'areaServed' => 'BR',
+              ],
+          ],
+          [
+              '@type' => 'WebSite',
+              '@id' => SITE_URL . '/#site',
+              'url' => SITE_URL . '/',
+              'name' => 'Syntra',
+              'inLanguage' => 'pt-BR',
+              'publisher' => ['@id' => SITE_URL . '/#org'],
+          ],
+          [
+              '@type' => 'SoftwareApplication',
+              'name' => 'Syntra',
+              'applicationCategory' => 'BusinessApplication',
+              'applicationSubCategory' => 'Gestão de clínicas e hospitais',
+              'operatingSystem' => 'Web',
+              'inLanguage' => 'pt-BR',
+              'description' => $pageDesc,
+              'url' => SITE_URL . '/',
+              'featureList' => array_merge(...array_map(fn($g) => array_column($g['items'], 1), array_values($modules ?? []))),
+              'publisher' => ['@id' => SITE_URL . '/#org'],
+          ],
+          [
+              '@type' => 'FAQPage',
+              'mainEntity' => array_map(fn($f) => [
+                  '@type' => 'Question',
+                  'name' => $f[0],
+                  'acceptedAnswer' => ['@type' => 'Answer', 'text' => $f[1]],
+              ], $faqs ?? []),
+          ],
+      ],
+  ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP) ?></script>
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>

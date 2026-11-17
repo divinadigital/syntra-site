@@ -10,7 +10,9 @@ date_default_timezone_set('America/Sao_Paulo');
 
 const SITE_NAME   = 'Syntra';
 const SITE_TAGLINE = 'A sinapse da sua clínica';
-const SITE_URL    = 'https://syntrabrasil.tech';
+// Endereço público do site, sem barra no final. Usado no canonical, no sitemap e nas imagens de compartilhamento.
+// Ao apontar um domínio próprio para o site, troque aqui e gere o site de novo.
+const SITE_URL    = 'https://divinadigital.github.io/syntra-site';
 const APP_URL     = 'https://app.syntrabrasil.tech';
 
 // Número do atendente no formato internacional, só dígitos (55 + DDD + número).

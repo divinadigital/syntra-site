@@ -88,7 +88,9 @@
     if (v('assunto')) L.push('Quero conversar sobre: ' + v('assunto') + '.');
     var url = wa(L.join('\n'));
     window.dataLayer && window.dataLayer.push({ event: 'cta_whatsapp', origem: 'form' });
-    var w = window.open(url, '_blank', 'noopener');
-    if (!w) location.href = url;
+    // link de reserva caso o navegador bloqueie a nova aba
+    var link = f.querySelector('[data-form-link]');
+    if (link) { link.href = url; link.hidden = false; }
+    window.open(url, '_blank', 'noopener');
   });
 })();

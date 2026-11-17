@@ -7,7 +7,7 @@
         <a class="btn btn--wa btn--sm" href="<?= cta('default') ?>" data-cta="footer"><?= icon('whatsapp', 18) ?> Chamar no WhatsApp</a>
       </div>
       <div>
-        <h4>Produto</h4>
+        <h2 class="footer__h">Produto</h2>
         <ul>
           <li><a href="#modulos">Módulos</a></li>
           <li><a href="#laudos">Laudos</a></li>
@@ -16,7 +16,7 @@
         </ul>
       </div>
       <div>
-        <h4>Atendimento</h4>
+        <h2 class="footer__h">Atendimento</h2>
         <ul>
           <li><a href="<?= cta('demo') ?>">Agendar demonstração</a></li>
           <li><a href="<?= cta('implantacao') ?>">Implantação e migração</a></li>
@@ -24,7 +24,7 @@
         </ul>
       </div>
       <div>
-        <h4>Clientes</h4>
+        <h2 class="footer__h">Clientes</h2>
         <ul>
           <li><a href="<?= APP_URL ?>/login" rel="noopener">Entrar no sistema</a></li>
           <li><a href="<?= APP_URL ?>/login/esqueci" rel="noopener">Esqueci minha senha</a></li>
@@ -46,6 +46,6 @@
   <a class="fab__btn" href="<?= cta('flutuante') ?>" data-cta="flutuante" aria-label="Falar com um atendente no WhatsApp"><?= icon('whatsapp', 28) ?></a>
 </div>
 
-<script src="assets/js/main.js?v=2" defer></script>
+<script src="assets/js/main.js?v=3" defer></script>
 </body>
 </html>

@@ -9,10 +9,16 @@
   const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   /* ---------- Tema claro / escuro ---------- */
+  const themeLabel = () => $$('.theme-toggle').forEach(b => {
+    const dark = document.documentElement.dataset.theme === 'dark';
+    b.setAttribute('aria-label', dark ? 'Mudar para o tema claro' : 'Mudar para o tema escuro');
+    b.setAttribute('aria-pressed', String(dark));
+  });
+  themeLabel();
   $$('.theme-toggle').forEach(b => b.addEventListener('click', () => {
     const d = document.documentElement;
     const next = d.dataset.theme === 'dark' ? 'light' : 'dark';
-    const apply = () => { d.dataset.theme = next; try { localStorage.setItem('syntra-theme', next); } catch (e) {} };
+    const apply = () => { d.dataset.theme = next; themeLabel(); try { localStorage.setItem('syntra-theme', next); } catch (e) {} };
     if (document.startViewTransition && !reduce) document.startViewTransition(apply); else apply();
   }));
 
@@ -98,7 +104,7 @@
     requestAnimationFrame(() => place(items[0]));
     if (!reduce) {
       let k = 0;
-      setInterval(() => { if (document.hidden) return; k = (k + 1) % items.length; place(items[k]); }, 2600);
+      setInterval(() => { if (document.hidden) return; k = (k + 1) % items.length; place(items[k]); }, 4200);
     }
   }
 
@@ -192,7 +198,7 @@
     init(); addEventListener('resize', init); document.fonts && document.fonts.ready.then(init);
     // troca sozinho uma vez para mostrar a solução, se o usuário não mexer
     const cmp = $('.compare');
-    if (cmp && !reduce) cmp.addEventListener('reveal', () => setTimeout(() => { if (!seg.dataset.touched) select($('#tab-syntra')); }, 2600), { once: true });
+    if (cmp && !reduce) cmp.addEventListener('reveal', () => setTimeout(() => { if (!seg.dataset.touched) select($('#tab-syntra')); }, 6500), { once: true });
   }
 
   /* Pílulas de filtro dos laudos */
@@ -254,7 +260,13 @@
   };
   const fab = $('#fab');
   addEventListener('scroll', onNav, { passive: true }); onNav();
-  if (fab) setTimeout(() => fab.classList.add('show-bubble'), 9000);
+  if (fab) {
+    // o balão aparece, fica um tempo e se recolhe; volta ao passar o mouse
+    setTimeout(() => fab.classList.add('show-bubble'), 9000);
+    setTimeout(() => fab.classList.remove('show-bubble'), 24000);
+    fab.addEventListener('pointerenter', () => fab.classList.add('show-bubble'));
+    fab.addEventListener('pointerleave', () => fab.classList.remove('show-bubble'));
+  }
 
   if (navLinks && pill) {
     const links = $$('a', navLinks);
@@ -265,7 +277,11 @@
     const sections = links.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
     const sio = new IntersectionObserver(es => es.forEach(en => {
       if (!en.isIntersecting) return;
-      links.forEach(a => a.classList.toggle('is-active', a.getAttribute('href') === '#' + en.target.id));
+      links.forEach(a => {
+        const on = a.getAttribute('href') === '#' + en.target.id;
+        a.classList.toggle('is-active', on);
+        if (on) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current');
+      });
       movePill(links.find(a => a.classList.contains('is-active')));
     }), { rootMargin: '-45% 0px -50% 0px' });
     sections.forEach(s => sio.observe(s));
@@ -279,28 +295,43 @@
     drawer.classList.toggle('is-open', open); drawer.setAttribute('aria-hidden', String(!open));
     burger.setAttribute('aria-expanded', String(open)); document.body.classList.toggle('menu-open', open);
     document.body.style.overflow = open ? 'hidden' : '';
+    $$('#nav, main, footer, #fab').forEach(el => { el.inert = open; });
     if (open) $('a, button', $('.drawer__panel')).focus(); else burger.focus({ preventScroll: true });
   };
   if (drawer && burger) {
     burger.addEventListener('click', () => setDrawer(true));
     $$('[data-close]', drawer).forEach(x => x.addEventListener('click', () => setDrawer(false)));
-    addEventListener('keydown', e => { if (e.key === 'Escape' && drawer.classList.contains('is-open')) setDrawer(false); });
+    addEventListener('keydown', e => {
+      if (!drawer.classList.contains('is-open')) return;
+      if (e.key === 'Escape') { setDrawer(false); return; }
+      if (e.key !== 'Tab') return;
+      const f = $$('a[href], button', $('.drawer__panel')); const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+    // se a tela crescer com o menu aberto, fecha
+    matchMedia('(min-width: 901px)').addEventListener('change', m => { if (m.matches && drawer.classList.contains('is-open')) setDrawer(false); });
   }
 
   /* ---------- Formulário: validação amigável ---------- */
   const form = $('[data-form]');
   if (form) form.addEventListener('submit', e => {
-    const nome = form.elements.nome;
+    const nome = form.elements.nome; const err = $('#f-nome-erro');
     if (!nome.value.trim()) {
       e.preventDefault();
       nome.focus();
       nome.setAttribute('aria-invalid', 'true');
-      nome.placeholder = 'Como podemos te chamar?';
+      if (err) err.hidden = false;
       if (!reduce) nome.animate([{ transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(5px)' }, { transform: 'translateX(-3px)' }, { transform: 'translateX(0)' }], { duration: 380, easing: 'cubic-bezier(.36,.07,.19,.97)' });
       return;
     }
     // abre o WhatsApp em nova aba no desktop; no celular segue no mesmo fluxo
     if (fine) form.target = '_blank';
+    const msg = $('[data-form-msg]', form); if (msg) msg.hidden = false;
+  });
+  if (form) form.elements.nome.addEventListener('input', () => {
+    form.elements.nome.removeAttribute('aria-invalid');
+    const err = $('#f-nome-erro'); if (err) err.hidden = true;
   });
 
   /* CTAs para o WhatsApp: no desktop abrem em nova aba (o visitante não perde o site) */
@@ -359,4 +390,6 @@
     if (reduce) { visible = false; draw(); return; }
     new IntersectionObserver(([en]) => { visible = en.isIntersecting; cancelAnimationFrame(raf); if (visible) raf = requestAnimationFrame(draw); }).observe(cv);
   });
+  // sinaliza que o JS carregou (o boot.js mostra o conteúdo se isto não acontecer)
+  window.__syntraReady = true;
 })();

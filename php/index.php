@@ -3,8 +3,18 @@ declare(strict_types=1);
 require __DIR__ . '/config.php';
 require __DIR__ . '/includes/icons.php';
 
-$pageTitle = 'Syntra — gestão para clínicas e hospitais';
-$pageDesc  = 'Agenda, recepção, laudos com ditado, faturamento TISS, financeiro e BI em um só sistema. Implantação guiada e atendimento humano pelo WhatsApp.';
+$pageTitle = 'Syntra — Sistema de gestão para clínicas e hospitais';
+$pageDesc  = 'Sistema de gestão para clínicas e hospitais: agenda, recepção, laudos com ditado, faturamento TISS, financeiro e BI. Fale com um especialista pelo WhatsApp.';
+
+// Perguntas frequentes (usadas na página e nos dados estruturados para buscadores)
+$faqs = [
+    ['Preciso instalar alguma coisa?', 'Não. A Syntra roda no navegador e pode ser instalada como aplicativo no computador ou no celular, sem loja de apps. Para PACS e importação de XML, há um agente leve que nossa equipe configura com você.'],
+    ['Quanto tempo leva a implantação?', 'Depende do tamanho da operação. O assistente "Pronto para atender" mostra cada etapa e o que falta. Clínicas que já têm cadastros em planilha importam pacientes, procedimentos e profissionais em minutos, com prévia e opção de desfazer.'],
+    ['Funciona com convênios?', 'Sim. O faturamento usa os padrões TISS e TUSS, lê XML de convênio e mantém os dados da clínica (CNES, registro ANS) num só lugar.'],
+    ['Consigo migrar do meu sistema atual?', 'Sim. Exportando os dados em planilha (CSV), a importação valida linha a linha antes de gravar. Para bases maiores, nossa equipe ajuda na migração.'],
+    ['Como ficam a segurança e a LGPD?', 'Cada usuário tem um perfil de acesso, as ações sensíveis ficam na auditoria e a saúde do sistema é monitorada (backups, importação, arquivos). O recurso de texto automático pode rodar num modelo dentro da rede da clínica.'],
+    ['Quanto custa?', 'O valor depende dos módulos e do número de profissionais. Fale com um atendente: em poucos minutos ele monta uma proposta para a sua operação.'],
+];
 
 $modules = [
     'atendimento' => [
@@ -110,7 +120,7 @@ require __DIR__ . '/includes/header.php';
             <span class="app__pill">Escuro</span>
             <span class="app__avatar">A</span>
           </div>
-          <h4>Bom dia, Dra. Lúcia</h4>
+          <div class="app__h">Bom dia, Dra. Lúcia</div>
           <div class="app__sub">Agenda de hoje · dados ilustrativos</div>
           <div class="kpis">
             <div class="kpi"><small>Agendados</small><b class="tnum" data-count="24">0</b></div>
@@ -395,14 +405,7 @@ require __DIR__ . '/includes/header.php';
       <div class="cta-row" data-reveal><a class="btn btn--ghost" href="<?= cta('faq') ?>" data-cta="faq"><?= icon('whatsapp', 18) ?> Perguntar a um atendente</a></div>
     </div>
     <div class="acc" data-acc>
-      <?php foreach ([
-          ['Preciso instalar alguma coisa?', 'Não. A Syntra roda no navegador e pode ser instalada como aplicativo no computador ou no celular, sem loja de apps. Para PACS e importação de XML, há um agente leve que nossa equipe configura com você.'],
-          ['Quanto tempo leva a implantação?', 'Depende do tamanho da operação. O assistente "Pronto para atender" mostra cada etapa e o que falta. Clínicas que já têm cadastros em planilha importam pacientes, procedimentos e profissionais em minutos, com prévia e opção de desfazer.'],
-          ['Funciona com convênios?', 'Sim. O faturamento usa os padrões TISS e TUSS, lê XML de convênio e mantém os dados da clínica (CNES, registro ANS) num só lugar.'],
-          ['Consigo migrar do meu sistema atual?', 'Sim. Exportando os dados em planilha (CSV), a importação valida linha a linha antes de gravar. Para bases maiores, nossa equipe ajuda na migração.'],
-          ['Como ficam a segurança e a LGPD?', 'Cada usuário tem um perfil de acesso, as ações sensíveis ficam na auditoria e a saúde do sistema é monitorada (backups, importação, arquivos). O recurso de texto automático pode rodar num modelo dentro da rede da clínica.'],
-          ['Quanto custa?', 'O valor depende dos módulos e do número de profissionais. Fale com um atendente: em poucos minutos ele monta uma proposta para a sua operação.'],
-      ] as $i => [$q, $a]): ?>
+      <?php foreach ($faqs as $i => [$q, $a]): ?>
         <div class="acc__item" data-reveal style="--i:<?= $i ?>">
           <button class="acc__btn" type="button" aria-expanded="<?= $i === 0 ? 'true' : 'false' ?>" aria-controls="faq-<?= $i ?>" id="faq-b<?= $i ?>"><?= e($q) ?> <?= icon('plus', 22) ?></button>
           <div class="acc__body" id="faq-<?= $i ?>" role="region" aria-labelledby="faq-b<?= $i ?>"><div><p><?= e($a) ?></p></div></div>
@@ -430,7 +433,8 @@ require __DIR__ . '/includes/header.php';
         <p>Só o nome é obrigatório.</p>
         <div class="field">
           <label for="f-nome">Seu nome</label>
-          <input id="f-nome" name="nome" autocomplete="name" required maxlength="60" placeholder="Ex.: Ana Souza">
+          <input id="f-nome" name="nome" autocomplete="name" required maxlength="60" placeholder="Ex.: Ana Souza" aria-describedby="f-nome-erro">
+          <span class="field-error" id="f-nome-erro" role="alert" hidden>Diga seu nome para o atendente saber com quem fala.</span>
         </div>
         <div class="field">
           <label for="f-clinica">Clínica ou hospital</label>
@@ -461,6 +465,7 @@ require __DIR__ . '/includes/header.php';
         </div>
         <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button class="btn btn--wa magnetic" type="submit"><?= icon('whatsapp') ?> Continuar no WhatsApp <?= icon('arrow', 18, 'i-arrow') ?></button>
+        <p class="form__msg" data-form-msg role="status" hidden>Abrimos o WhatsApp em outra aba com a sua mensagem. <a data-form-link href="#" target="_blank" rel="noopener" hidden>Não abriu? Abrir conversa</a></p>
         <small>Abrimos o WhatsApp com a mensagem pronta. Nada é enviado sem você confirmar.</small>
       </form>
     </div>

@@ -5,18 +5,31 @@ DirectoryIndex index.php
   Header always set X-Content-Type-Options "nosniff"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
-  <FilesMatch "\.(css|js|svg|woff2)$">
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin-allow-popups"
+  # HTTPS obrigatório por 1 ano (só tem efeito quando o site é servido por HTTPS)
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+  # A página já define a política completa por <meta>; aqui entra o que só funciona por cabeçalho
+  Header always set Content-Security-Policy "frame-ancestors 'self'"
+  <FilesMatch "\.(css|js|svg|png|woff2|webmanifest)$">
     Header set Cache-Control "public, max-age=2592000"
   </FilesMatch>
 </IfModule>
 
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # força HTTPS
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
+
 <IfModule mod_deflate.c>
-  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml application/manifest+json
 </IfModule>
 
 # Bloqueia acesso direto aos arquivos internos
 <FilesMatch "^(config\.php|.*\.md)$">
   Require all denied
 </FilesMatch>
-RedirectMatch 403 ^/includes/
+RedirectMatch 403 ^/(includes|tools)/

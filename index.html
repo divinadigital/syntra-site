@@ -3,30 +3,39 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Syntra — gestão para clínicas e hospitais</title>
-  <meta name="description" content="Agenda, recepção, laudos com ditado, faturamento TISS, financeiro e BI em um só sistema. Implantação guiada e atendimento humano pelo WhatsApp.">
+  <!-- Segurança: só carrega scripts do próprio site (nenhum script inline) e fontes do Google Fonts.
+       Ao adicionar Analytics/Tag Manager, inclua os domínios deles em script-src e connect-src. -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' https://wa.me https://api.whatsapp.com">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Syntra — Sistema de gestão para clínicas e hospitais</title>
+  <meta name="description" content="Sistema de gestão para clínicas e hospitais: agenda, recepção, laudos com ditado, faturamento TISS, financeiro e BI. Fale com um especialista pelo WhatsApp.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://divinadigital.github.io/syntra-site/">
   <meta name="theme-color" content="#0b2f57">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Syntra — gestão para clínicas e hospitais">
-  <meta property="og:description" content="Agenda, recepção, laudos com ditado, faturamento TISS, financeiro e BI em um só sistema. Implantação guiada e atendimento humano pelo WhatsApp.">
+  <meta property="og:site_name" content="Syntra">
+  <meta property="og:url" content="https://divinadigital.github.io/syntra-site/">
+  <meta property="og:title" content="Syntra — Sistema de gestão para clínicas e hospitais">
+  <meta property="og:description" content="Sistema de gestão para clínicas e hospitais: agenda, recepção, laudos com ditado, faturamento TISS, financeiro e BI. Fale com um especialista pelo WhatsApp.">
   <meta property="og:locale" content="pt_BR">
+  <meta property="og:image" content="https://divinadigital.github.io/syntra-site/assets/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Syntra — A sinapse da sua clínica. Sistema de gestão para clínicas e hospitais.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Syntra — Sistema de gestão para clínicas e hospitais">
+  <meta name="twitter:description" content="Sistema de gestão para clínicas e hospitais: agenda, recepção, laudos com ditado, faturamento TISS, financeiro e BI. Fale com um especialista pelo WhatsApp.">
+  <meta name="twitter:image" content="https://divinadigital.github.io/syntra-site/assets/img/og.png">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lato:wght@700;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-  <script>document.write('<script src="config.js?t=' + Date.now() + '"><\/script>');</script>
-<script>try { if (!localStorage.getItem('syntra-theme') && window.SYNTRA_CONFIG && SYNTRA_CONFIG.theme === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}</script>
-  <link rel="stylesheet" href="assets/css/style.css?v=4">
-  <script>
-    // tema antes da pintura (sem "piscar")
-    (function () {
-      var d = document.documentElement; d.classList.add('js');
-      try { var t = localStorage.getItem('syntra-theme'); if (t) d.dataset.theme = t; } catch (e) {}
-    })();
-  </script>
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Syntra","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"Agenda, recepção, laudos com ditado, faturamento TISS, financeiro e BI em um só sistema. Implantação guiada e atendimento humano pelo WhatsApp.","url":"https://syntrabrasil.tech"}
-  </script>
+  <link rel="stylesheet" href="assets/css/style.css?v=5">
+  <script src="config.js"></script>
+  <script src="assets/js/boot.js?v=1"></script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://divinadigital.github.io/syntra-site/#org","name":"Syntra","url":"https://divinadigital.github.io/syntra-site/","logo":"https://divinadigital.github.io/syntra-site/assets/img/icon-512.png","slogan":"A sinapse da sua clínica","email":"contato@syntrabrasil.tech","contactPoint":{"@type":"ContactPoint","contactType":"sales","telephone":"+554896225170","availableLanguage":"pt-BR","areaServed":"BR"}},{"@type":"WebSite","@id":"https://divinadigital.github.io/syntra-site/#site","url":"https://divinadigital.github.io/syntra-site/","name":"Syntra","inLanguage":"pt-BR","publisher":{"@id":"https://divinadigital.github.io/syntra-site/#org"}},{"@type":"SoftwareApplication","name":"Syntra","applicationCategory":"BusinessApplication","applicationSubCategory":"Gestão de clínicas e hospitais","operatingSystem":"Web","inLanguage":"pt-BR","description":"Sistema de gestão para clínicas e hospitais: agenda, recepção, laudos com ditado, faturamento TISS, financeiro e BI. Fale com um especialista pelo WhatsApp.","url":"https://divinadigital.github.io/syntra-site/","featureList":["Pacientes","Agenda","Recepção","Consultório","Centro cirúrgico","Internação","Saúde integrativa","CRM / Funil","Laudos","Faturamento","Financeiro","Farmácia e estoque","Compras","BI \u0026 Painéis","Origem dos pacientes","Qualidade \u0026 Segurança","Saúde do sistema","Manual do sistema","App instalável"],"publisher":{"@id":"https://divinadigital.github.io/syntra-site/#org"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Preciso instalar alguma coisa?","acceptedAnswer":{"@type":"Answer","text":"Não. A Syntra roda no navegador e pode ser instalada como aplicativo no computador ou no celular, sem loja de apps. Para PACS e importação de XML, há um agente leve que nossa equipe configura com você."}},{"@type":"Question","name":"Quanto tempo leva a implantação?","acceptedAnswer":{"@type":"Answer","text":"Depende do tamanho da operação. O assistente \"Pronto para atender\" mostra cada etapa e o que falta. Clínicas que já têm cadastros em planilha importam pacientes, procedimentos e profissionais em minutos, com prévia e opção de desfazer."}},{"@type":"Question","name":"Funciona com convênios?","acceptedAnswer":{"@type":"Answer","text":"Sim. O faturamento usa os padrões TISS e TUSS, lê XML de convênio e mantém os dados da clínica (CNES, registro ANS) num só lugar."}},{"@type":"Question","name":"Consigo migrar do meu sistema atual?","acceptedAnswer":{"@type":"Answer","text":"Sim. Exportando os dados em planilha (CSV), a importação valida linha a linha antes de gravar. Para bases maiores, nossa equipe ajuda na migração."}},{"@type":"Question","name":"Como ficam a segurança e a LGPD?","acceptedAnswer":{"@type":"Answer","text":"Cada usuário tem um perfil de acesso, as ações sensíveis ficam na auditoria e a saúde do sistema é monitorada (backups, importação, arquivos). O recurso de texto automático pode rodar num modelo dentro da rede da clínica."}},{"@type":"Question","name":"Quanto custa?","acceptedAnswer":{"@type":"Answer","text":"O valor depende dos módulos e do número de profissionais. Fale com um atendente: em poucos minutos ele monta uma proposta para a sua operação."}}]}]}</script>
 </head>
 <body>
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
@@ -124,7 +133,7 @@
             <span class="app__pill">Escuro</span>
             <span class="app__avatar">A</span>
           </div>
-          <h4>Bom dia, Dra. Lúcia</h4>
+          <div class="app__h">Bom dia, Dra. Lúcia</div>
           <div class="app__sub">Agenda de hoje · dados ilustrativos</div>
           <div class="kpis">
             <div class="kpi"><small>Agendados</small><b class="tnum" data-count="24">0</b></div>
@@ -652,7 +661,8 @@
         <p>Só o nome é obrigatório.</p>
         <div class="field">
           <label for="f-nome">Seu nome</label>
-          <input id="f-nome" name="nome" autocomplete="name" required maxlength="60" placeholder="Ex.: Ana Souza">
+          <input id="f-nome" name="nome" autocomplete="name" required maxlength="60" placeholder="Ex.: Ana Souza" aria-describedby="f-nome-erro">
+          <span class="field-error" id="f-nome-erro" role="alert" hidden>Diga seu nome para o atendente saber com quem fala.</span>
         </div>
         <div class="field">
           <label for="f-clinica">Clínica ou hospital</label>
@@ -684,6 +694,7 @@
         </div>
         <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button class="btn btn--wa magnetic" type="submit"><svg class="" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 0 1 7 2.9 9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.17-1.24-6.16-3.48-8.4"/></svg> Continuar no WhatsApp <svg class="i-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+        <p class="form__msg" data-form-msg role="status" hidden>Abrimos o WhatsApp em outra aba com a sua mensagem. <a data-form-link href="#" target="_blank" rel="noopener" hidden>Não abriu? Abrir conversa</a></p>
         <small>Abrimos o WhatsApp com a mensagem pronta. Nada é enviado sem você confirmar.</small>
       </form>
     </div>
@@ -701,7 +712,7 @@
         <a class="btn btn--wa btn--sm" href="https://wa.me/554896225170?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Syntra." rel="noopener" data-origem="default" data-cta="footer"><svg class="" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 0 1 7 2.9 9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.17-1.24-6.16-3.48-8.4"/></svg> Chamar no WhatsApp</a>
       </div>
       <div>
-        <h4>Produto</h4>
+        <h2 class="footer__h">Produto</h2>
         <ul>
           <li><a href="#modulos">Módulos</a></li>
           <li><a href="#laudos">Laudos</a></li>
@@ -710,7 +721,7 @@
         </ul>
       </div>
       <div>
-        <h4>Atendimento</h4>
+        <h2 class="footer__h">Atendimento</h2>
         <ul>
           <li><a href="https://wa.me/554896225170?text=Ol%C3%A1%21%20Gostaria%20de%20agendar%20uma%20demonstra%C3%A7%C3%A3o%20da%20Syntra." rel="noopener" data-origem="demo">Agendar demonstração</a></li>
           <li><a href="https://wa.me/554896225170?text=Ol%C3%A1%21%20Quero%20saber%20como%20funciona%20a%20implanta%C3%A7%C3%A3o%20da%20Syntra." rel="noopener" data-origem="implantacao">Implantação e migração</a></li>
@@ -718,7 +729,7 @@
         </ul>
       </div>
       <div>
-        <h4>Clientes</h4>
+        <h2 class="footer__h">Clientes</h2>
         <ul>
           <li><a href="https://app.syntrabrasil.tech/login" rel="noopener">Entrar no sistema</a></li>
           <li><a href="https://app.syntrabrasil.tech/login/esqueci" rel="noopener">Esqueci minha senha</a></li>
@@ -739,7 +750,7 @@
   <a class="fab__btn" href="https://wa.me/554896225170?text=Ol%C3%A1%21%20Estou%20no%20site%20da%20Syntra%20e%20tenho%20uma%20d%C3%BAvida." rel="noopener" data-origem="flutuante" data-cta="flutuante" aria-label="Falar com um atendente no WhatsApp"><svg class="" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12.05 21.79h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 0 1 7 2.9 9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.81 11.81 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.94L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.34 11.89-11.9 0-3.17-1.24-6.16-3.48-8.4"/></svg></a>
 </div>
 
-<script src="assets/js/apply-config.js?v=1" defer></script>
-<script src="assets/js/main.js?v=2" defer></script>
+<script src="assets/js/apply-config.js?v=2" defer></script>
+<script src="assets/js/main.js?v=3" defer></script>
 </body>
 </html>
