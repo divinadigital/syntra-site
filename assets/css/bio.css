@@ -151,3 +151,27 @@ h1 { margin: 0; font-family: "Lato", var(--font); font-weight: 900; font-size: 3
   .bio__tag { -webkit-text-fill-color: currentColor; background: none; }
   .bio__mark::before, .bio__mark::after, .link--wa::after, .dot::after { display: none; }
 }
+
+/* ================= Compacto: tudo cabe numa tela de celular, sem rolar ================= */
+.bio { gap: 18px; padding-top: max(20px, env(safe-area-inset-top, 0px) + 14px); padding-bottom: max(14px, env(safe-area-inset-bottom, 0px) + 10px); }
+.bio__mark, .bio__logo { width: 60px; height: 60px; }
+.bio__mark { margin-bottom: 10px; }
+.bio__logo, .bio__mark::before, .bio__mark::after { border-radius: 16px; }
+h1 { font-size: 26px; }
+.bio__tag { font-size: 14px; margin-top: 2px; }
+.bio__sub { font-size: 13.5px; margin-top: 8px; line-height: 1.4; }
+.bio__status { margin-top: 10px; padding: 4px 12px; font-size: 12.5px; }
+.links { gap: 8px; }
+.link { min-height: 58px; padding: 8px 14px 8px 9px; gap: 12px; grid-template-columns: 40px 1fr auto; border-radius: 15px; }
+.link__ic { width: 40px; height: 40px; border-radius: 11px; }
+.link__ic svg { width: 20px; height: 20px; }
+.link__tx b { font-size: 15px; }
+.link__tx small { font-size: 12.5px; margin-top: 1px; }
+.bio__foot { padding-top: 0; gap: 0; font-size: 12px; }
+.bio__foot a { padding: 4px; }
+/* telas baixas (celulares menores): some o texto de apoio e encolhe mais um pouco */
+@media (max-height: 700px) {
+  .bio__sub { display: none; }
+  .bio { gap: 14px; }
+  .link { min-height: 54px; }
+}
