@@ -12,7 +12,10 @@
 
   /* WhatsApp: cada botão usa a mensagem da sua origem */
   if (num) $$('a[data-origem]').forEach(function (a) {
-    var msg = M[a.dataset.origem] || M['default'] || 'Olá! Vim pelo site da Syntra.';
+    // sem mensagem configurada para esta origem: mantém a que já está no link da página
+    var own = '';
+    try { own = new URL(a.href).searchParams.get('text') || ''; } catch (e) {}
+    var msg = M[a.dataset.origem] || (a.dataset.perfil ? '' : own) || M['default'] || 'Olá! Vim pelo site da Syntra.';
     var p = a.dataset.perfil;
     if (p && perfis[p]) msg += ' Perfil: ' + perfis[p] + '.';
     a.href = wa(msg);
