@@ -1,9 +1,9 @@
 <footer class="footer">
   <div class="wrap">
     <div class="footer__grid">
-      <div>
+      <div class="footer__brand">
         <span class="logo"><?= logo_full() ?></span>
-        <p style="color:var(--muted);font-size:14.5px;max-width:34ch;margin:14px 0 18px">Gestão para clínicas e hospitais — agenda, atendimento, laudos, faturamento e BI no mesmo lugar.</p>
+        <p>Gestão para clínicas e hospitais — agenda, atendimento, laudos, faturamento e BI no mesmo lugar.</p>
         <a class="btn btn--wa btn--sm" href="<?= cta('default') ?>" data-cta="footer"><?= icon('whatsapp', 18) ?> Chamar no WhatsApp</a>
       </div>
       <div>
