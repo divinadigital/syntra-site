@@ -29,7 +29,8 @@ body {
 }
 
 .bio__head { text-align: center; }
-.bio__logo { width: 84px; height: 84px; display: block; margin: 0 auto 14px; border-radius: 22px; box-shadow: 0 18px 40px -14px rgb(4 20 44 / .8), 0 0 0 1px rgb(255 255 255 / .18); }
+.bio__mark { position: relative; width: 84px; height: 84px; margin: 0 auto 14px; }
+.bio__logo { position: relative; width: 84px; height: 84px; display: block; border-radius: 22px; box-shadow: 0 18px 40px -14px rgb(4 20 44 / .8), 0 0 0 1px rgb(255 255 255 / .18); }
 h1 { margin: 0; font-family: "Lato", var(--font); font-weight: 900; font-size: 34px; letter-spacing: -.01em; line-height: 1.1; }
 .bio__tag { margin: 4px 0 0; color: var(--sky); font-weight: 600; font-size: 15.5px; }
 .bio__sub { margin: 12px auto 0; max-width: 34ch; color: var(--soft); font-size: 14.5px; text-wrap: balance; }
@@ -39,11 +40,12 @@ h1 { margin: 0; font-family: "Lato", var(--font); font-weight: 900; font-size: 3
 
 .links { display: grid; gap: 12px; }
 .link {
+  position: relative; overflow: hidden; isolation: isolate;
   display: grid; grid-template-columns: 46px 1fr auto; align-items: center; gap: 14px;
   min-height: 72px; padding: 12px 16px 12px 12px; border-radius: 18px; text-decoration: none;
   background: var(--card); color: var(--ink);
   box-shadow: 0 14px 30px -18px rgb(4 20 44 / .9);
-  transition: transform .3s var(--ease-out), box-shadow .3s var(--ease-out);
+  transition: transform .5s var(--ease-out), box-shadow .5s var(--ease-out);
   -webkit-tap-highlight-color: transparent;
 }
 .link:hover { transform: translateY(-2px); box-shadow: 0 20px 36px -18px rgb(4 20 44 / .95); }
@@ -72,8 +74,8 @@ h1 { margin: 0; font-family: "Lato", var(--font); font-weight: 900; font-size: 3
 .bio__foot a { color: #e3f0ff; text-decoration: underline; text-underline-offset: 3px; padding: 6px 4px; }
 
 /* entrada em sequência */
-@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
-.bio__head > *, .link, .bio__foot { animation: rise .7s var(--ease-out) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(16px) scale(.97); filter: blur(6px); } }
+.bio__head > *, .link, .bio__foot { animation: rise .7s var(--ease-out) backwards; }
 .bio__head > :nth-child(2) { animation-delay: .05s; }
 .bio__head > :nth-child(3) { animation-delay: .1s; }
 .bio__head > :nth-child(4) { animation-delay: .15s; }
@@ -86,3 +88,66 @@ h1 { margin: 0; font-family: "Lato", var(--font); font-weight: 900; font-size: 3
 .bio__foot { animation-delay: .62s; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
 @media (max-width: 360px) { .link { grid-template-columns: 42px 1fr auto; gap: 12px; } .link__ic { width: 42px; height: 42px; } .link__tx b { font-size: 15px; } }
+
+/* ================= Motion ================= */
+.synapse { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: 0; transition: opacity 1.6s ease; }
+.motion .synapse { opacity: 1; }
+.motion .net { opacity: 0; transition: opacity 1.2s ease; }  /* a rede estática dá lugar à animada */
+
+/* logo: flutua devagar e emite anéis, como um sinal */
+.bio__logo { animation: float 7s ease-in-out infinite; }
+.bio__mark::before, .bio__mark::after {
+  content: ""; position: absolute; inset: 0; border-radius: 22px; border: 1.5px solid rgb(159 208 255 / .55);
+  animation: ring 4.2s var(--ease-out) infinite; pointer-events: none;
+}
+.bio__mark::after { animation-delay: 2.1s; }
+@keyframes float { 50% { transform: translateY(-5px); } }
+@keyframes ring { from { transform: scale(1); opacity: .7; } 70%, to { transform: scale(1.75); opacity: 0; } }
+
+/* ponto de "online": pulso suave (some quando está fora do horário) */
+.dot { position: relative; }
+.dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: ping 2.4s var(--ease-out) infinite; }
+.dot--off::after { display: none; }
+@keyframes ping { from { transform: scale(1); opacity: .6; } to { transform: scale(2.6); opacity: 0; } }
+
+/* slogan: brilho que atravessa o texto de tempos em tempos */
+.bio__tag {
+  background: linear-gradient(110deg, var(--sky) 42%, #fff 50%, var(--sky) 58%); background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  animation: rise .7s var(--ease-out) .05s backwards, shine 6s linear 1.2s infinite;
+}
+@keyframes shine { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+
+/* botão do WhatsApp: brilho que passa e seta que convida ao toque */
+.link--wa::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / .32) 50%, transparent 65%);
+  transform: translateX(-120%); animation: sweep 5.5s var(--ease-out) 1.6s infinite;
+}
+@keyframes sweep { 0% { transform: translateX(-120%); } 28%, 100% { transform: translateX(120%); } }
+.link--wa .link__go { animation: nudge 2.6s ease-in-out 1.4s infinite; }
+@keyframes nudge { 0%, 60%, 100% { transform: translateX(0); } 30% { transform: translateX(4px); } }
+.link--wa .link__ic svg { animation: wiggle 5.5s ease-in-out 2s infinite; transform-origin: 50% 60%; }
+@keyframes wiggle { 0%, 12%, 100% { transform: rotate(0); } 3% { transform: rotate(-9deg); } 6% { transform: rotate(7deg); } 9% { transform: rotate(-4deg); } }
+
+/* luz que segue o mouse (computador) */
+.link::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0; transition: opacity .4s ease;
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgb(21 112 201 / .13), transparent 65%);
+}
+.link--wa::before, .link--ghost::before { background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgb(255 255 255 / .2), transparent 65%); }
+@media (hover: hover) { .link:hover::before { opacity: 1; } }
+
+/* ícone reage ao passar o mouse ou ao foco */
+.link__ic { transition: transform .5s var(--ease-out), background-color .4s ease; }
+.link:hover .link__ic, .link:focus-visible .link__ic { transform: scale(1.07) rotate(-5deg); }
+
+/* onda do toque (criada pelo bio.js no ponto pressionado) */
+.ripple { position: absolute; z-index: -1; border-radius: 50%; pointer-events: none; background: rgb(21 112 201 / .16); transform: scale(0); animation: ripple .7s var(--ease-out) forwards; }
+.link--wa .ripple, .link--ghost .ripple { background: rgb(255 255 255 / .28); }
+@keyframes ripple { to { transform: scale(1); opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .bio__tag { -webkit-text-fill-color: currentColor; background: none; }
+  .bio__mark::before, .bio__mark::after, .link--wa::after, .dot::after { display: none; }
+}
