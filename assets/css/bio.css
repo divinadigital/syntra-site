@@ -175,3 +175,19 @@ h1 { font-size: 26px; }
   .bio { gap: 14px; }
   .link { min-height: 54px; }
 }
+/* altura exata da tela visível (sem a barra do navegador), para não sobrar 1px de rolagem */
+body { min-height: 0; }
+.bio { min-height: 100vh; min-height: 100svh; }
+/* telas bem baixas (navegador do Instagram em celular pequeno) */
+@media (max-height: 620px) {
+  .bio { gap: 12px; padding-top: max(12px, env(safe-area-inset-top, 0px) + 8px); }
+  .bio__mark, .bio__logo { width: 46px; height: 46px; }
+  .bio__logo, .bio__mark::before, .bio__mark::after { border-radius: 12px; }
+  .bio__mark { margin-bottom: 6px; }
+  h1 { font-size: 22px; }
+  .bio__status { margin-top: 8px; }
+  .links { gap: 7px; }
+  .link { min-height: 50px; padding-block: 6px; }
+  .link__ic { width: 36px; height: 36px; }
+  .link { grid-template-columns: 36px 1fr auto; }
+}
